@@ -7,17 +7,15 @@
 	<script src="polls.js"></script>
 	<script>
 		function getPolls() {
-			makeRequest('https://chooser.azure-mobile.net/api/testapi', addNewPolls('PollsContainer'));
+			makeRequest('https://chooser.azure-mobile.net/api/testapi', addNewPolls('PollsContainer'), function(msg) { console.log(msg); });
 		}
 	</script>
 </head>
 <body>
 
 <button type="button" onclick="javascript:getPolls();">Get Polls</button>
-
-<div id="PollsContainer">
-	
-</div>
+<div id="PollsContainer" />
+<div id="ErrorContainer" />
 
 </body>
 </html>

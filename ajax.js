@@ -1,6 +1,7 @@
 // Create the XHR object.
 function createCORSRequest(method, url) {
 	var xhr = new XMLHttpRequest();
+	xhr.withCredentials = false;
 	if ("withCredentials" in xhr) {
 		// XHR for Chrome/Firefox/Opera/Safari.
 		xhr.open(method, url, true);
@@ -15,26 +16,21 @@ function createCORSRequest(method, url) {
 	return xhr;
 }
 
-// Helper method to parse the title tag from the response.
-function getTitle(text) {
-	return text.match('<title>(.*)?</title>')[1];
-}
-
 // Make the actual CORS request.
-function makeRequest(url, cont) {
+function makeRequest(url, succ, fail) {
 	var xhr = createCORSRequest('GET', url);
 	if (!xhr) {
-		alert('CORS not supported');
+		fail('CORS not supported');
 		return;
 	}
 
 	// Response handlers.
 	xhr.onload = function () {
-		cont(xhr.responseText);
+		succ(xhr.responseText);
 	};
 
 	xhr.onerror = function () {
-		alert('Woops, there was an error making the request.');
+		fail('Woops, there was an error making the request.');
 	};
 
 	xhr.send();
