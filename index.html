@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Get Polls</title>
-	<script src="ajax.js" />
-	<script src="polls.js" />
+	<script src="ajax.js"></script>
+	<script src="polls.js"></script>
+	<script>
+		function getPolls() {
+			makeRequest('https://chooser.azure-mobile.net/api/testapi', addNewPolls('PollsContainer'));
+		}
+	</script>
 </head>
 <body>
 
-<div>
-	<script>
-		fetchPolls(addNewPolls);
-	</script>
+<button type="button" onclick="javascript:getPolls();">Get Polls</button>
+
+<div id="PollsContainer">
+	
 </div>
 
 </body>

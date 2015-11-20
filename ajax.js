@@ -1,10 +1,41 @@
-function fetchPolls(cont) {
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-		if (xhttp.readyState == 4 && xhttp.status == 200) {
-			cont(xhttp.responseText);
-		}
+// Create the XHR object.
+function createCORSRequest(method, url) {
+	var xhr = new XMLHttpRequest();
+	if ("withCredentials" in xhr) {
+		// XHR for Chrome/Firefox/Opera/Safari.
+		xhr.open(method, url, true);
+	} else if (typeof XDomainRequest != "undefined") {
+		// XDomainRequest for IE.
+		xhr = new XDomainRequest();
+		xhr.open(method, url);
+	} else {
+		// CORS not supported.
+		xhr = null;
+	}
+	return xhr;
+}
+
+// Helper method to parse the title tag from the response.
+function getTitle(text) {
+	return text.match('<title>(.*)?</title>')[1];
+}
+
+// Make the actual CORS request.
+function makeRequest(url, cont) {
+	var xhr = createCORSRequest('GET', url);
+	if (!xhr) {
+		alert('CORS not supported');
+		return;
+	}
+
+	// Response handlers.
+	xhr.onload = function () {
+		cont(xhr.responseText);
 	};
-	xhttp.open("GET", "ajax_info.txt", true);
-	xhttp.send();
+
+	xhr.onerror = function () {
+		alert('Woops, there was an error making the request.');
+	};
+
+	xhr.send();
 }
