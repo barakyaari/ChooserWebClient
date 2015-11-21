@@ -16,7 +16,7 @@
 	<script src="polls.js"></script>
 	<script>
 		function getPolls() {
-			makeRequest('https://chooser.azure-mobile.net/api/testapi', addNewPolls('PollsContainer'), function(msg) { console.log(msg); });
+			makeRequest('http://chooser.cloudapp.net:8080/getPolls', addNewPolls('PollsContainer'), function(msg) { console.log(msg); });
 		}
 		
 		function submitChunk() {

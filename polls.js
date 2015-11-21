@@ -4,17 +4,18 @@ function addNewPolls(containerId) {
 	var mainContainerDiv = document.getElementById(containerId);
 	
 	return function(dataset) {
-		dataset = JSON.parse(dataset)["message"];
+		dataset = JSON.parse(dataset);
 		
 		for(var i = 0; i < dataset.length; i++) {
 			var newData = dataset[i];
+			console.log(newData);
 			var frameDiv = createFeedItem(
-				newData["poll_title"],
-				newData["image1_description"],
-				newData["image2_description"],
-				newData["image1_image"],
-				newData["image2_image"],
-				voteCallback(newData["Id"], mainContainerDiv));
+				newData["title"],
+				newData["description1"],
+				newData["description2"],
+				newData["image1"],
+				newData["image2"],
+				voteCallback(newData["id"], mainContainerDiv));
 			
 			mainContainerDiv.insertBefore(frameDiv, mainContainerDiv.firstChild);
 		}
