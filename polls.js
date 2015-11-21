@@ -65,5 +65,5 @@ function createFeedItem(title, subtitle1, subtitle2, src1, src2, vote) {
 function submitVotes(containerId) {
 	votesQueue = [];
 	document.getElementById("ResultSet").innerHTML = "";
-	alert("Sent!");
+	console.log("SubmitVotes has not been implemented yet.");
 }
