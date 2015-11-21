@@ -3,19 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Get Polls</title>
+	<style>
+		#PollsContainer div {
+			display: none;
+		}
+		
+		#PollsContainer div:first-child, #PollsContainer div div {
+			display: block;
+		}
+	</style>
 	<script src="ajax.js"></script>
 	<script src="polls.js"></script>
 	<script>
 		function getPolls() {
 			makeRequest('https://chooser.azure-mobile.net/api/testapi', addNewPolls('PollsContainer'), function(msg) { console.log(msg); });
 		}
+		
+		function submitChunk() {
+			submitVotes("ResultSet");
+		}
 	</script>
 </head>
 <body>
 
 <button type="button" onclick="javascript:getPolls();">Get Polls</button>
-<div id="PollsContainer" />
-<div id="ErrorContainer" />
+<button type="button" onclick="javascript:submitChunk();">Submit Chunk</button>
+
+<span id="ResultSet"></span>
+<div id="PollsContainer"></div>
 
 </body>
 </html>
